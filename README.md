@@ -1,6 +1,6 @@
 ## Crypto Transaction Tracker 
 
-The crypto Transaction main purpose is to track the upcoming new transactions performed by the address that has been added to watchlist. The watchlist consists of those addresses that will be tracked by system. But the transactions that are only tracked are Ethereum based on ERC-20 Token based transactions. Internal transactions are not being tracked. Also, the transactions that were performed when the system application was offline will also not be tracked and hence only those transactions will be saved when the system is online and running. Here are the functionalities of the application. 
+The crypto Transaction main purpose is to track the upcoming new transactions performed by the address that has been added to watchlist. The watchlist consists of those addresses that will be tracked by system. But the transactions that are only tracked are Ethereum based on ERC-20 Token based transactions. Internal transactions are not being tracked. Also, the transactions that were performed when the system application was offline will also not be tracked and hence only those transactions will be saved when the system is online and running.
 
 ## Tools
 
