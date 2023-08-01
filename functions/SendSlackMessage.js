@@ -1,4 +1,5 @@
 const axios= require ("axios") // using axios Request
+require("dotenv"). config()
 
 // Sends transaction message to Slack channel.
 async function sendSlackMessage(transaction){
@@ -18,7 +19,8 @@ async function sendSlackMessage(transaction){
             }
         
         // Pushing notifications
-         await axios.post("https://hooks.slack.com/services/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",payload)
+        const slackApi= process.env.SLACK_WEB_API
+         await axios.post(slackApi,payload)
     } catch (error) {
         console.log(error)
     }
