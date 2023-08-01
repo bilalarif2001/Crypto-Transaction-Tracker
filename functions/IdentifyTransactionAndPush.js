@@ -50,6 +50,7 @@ async function identifyTransactionTypeAndPush(blockNumber){
 
                  // Saving transaction to DB and sending notification
                  await saveTransactionAndSendNotification(from,transactionHash,transactionData)
+                 console.log("Transaction has been saved to database")
                  }
             }
             else {
@@ -75,12 +76,13 @@ async function identifyTransactionTypeAndPush(blockNumber){
                  }
                  // Saving transaction to DB and sending notification
                   await saveTransactionAndSendNotification(from,hash,transactionData)
+                  console.log("Transaction has been saved to database")
                   }
             
         })
         }
     
-        else if (checkTransactions===false) console.log("no transaction by watchlist addresses in current block")
+        else if (checkTransactions===false) console.log("no transaction performed by watchlist addresses in current block")
         else console.log("Some error occured in filtering the data.")
     } catch (error) {
         console.log(error)

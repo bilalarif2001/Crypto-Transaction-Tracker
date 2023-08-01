@@ -16,29 +16,44 @@ async function findAddressinDB(address){
 // API endpoint for taking addresses to watch
 router.post("/addAddress", async (req, res) => {
   let { address } = req.body;
+try {
+  if (address.length===42){ // Checking if address is valid
+    let checkAddress = await findAddressinDB(address)  // checking if user already exists
 
-let checkAddress = await findAddressinDB(address)  // checking if user already exists
-
-if (checkAddress)
-    res.status(403).send({ message: "Address already exists in database" });
-  else {
-    // If user does not exist in database, then add address into DB.
-    let user = {
-      address: address.toLowerCase(),
-    };
-    const newUser = new addressSchema(user);
-    await newUser.save(); // Saving data into address database
-    res.status(200).send({ message: "success" });
+    if (checkAddress)
+        res.status(403).send({ message: "Address already exists in database" });
+      else {
+        // If user does not exist in database, then add address into DB.
+        let user = {
+          address: address.toLowerCase(),
+        };
+        const newUser = new addressSchema(user);
+        await newUser.save(); // Saving data into address database
+        res.status(200).send({ message: "success" });
+      }
   }
+  else res.status(400).send({message:"Invalid Address Format"})  
+ 
+} catch (error) {
+  console.log(error)
+}
+
 })
 
 router.get("/viewAddressTransactions/:address", async (req, res) => {
-  let {address}=req.params
-  let result = await addressSchema.findOne({ address: address.toLowerCase()}) // finding address from DB
+  try {
+    let {address}=req.params
+  if (address.length===42){
+    let result = await addressSchema.findOne({ address: address.toLowerCase()}) // finding address from DB
 
   if(result) res.status(200).send({transactions:result.transactions}) // If address exists in database, return transactions
   else res.status(404).send({message:"Address is invalid or address does not exist in database"})
-
+  }
+  else res.status(400).send({message:"Invalid Address Format"}) 
+  
+  } catch (error) {
+    console.log(error)
+  }
 
 })
 
